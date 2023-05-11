@@ -1,9 +1,25 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+
   const handleLogin = (event) => {
     event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    signIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -51,7 +67,12 @@ const Login = () => {
                 />
               </div>
             </form>
-            <p className="my-4 text-center">Don't have an account? <Link className="text-red-600 font-semibold" to='/signup'>Sign Up</Link></p>
+            <p className="my-4 text-center">
+              Don't have an account?{" "}
+              <Link className="text-red-600 font-semibold" to="/signup">
+                Sign Up
+              </Link>
+            </p>
           </div>
         </div>
       </div>
