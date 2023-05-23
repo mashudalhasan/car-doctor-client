@@ -9,7 +9,7 @@ const Services = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/services?search=${search}&sort=${
+      `https://car-doctor-server-lime-kappa.vercel.app/services?search=${search}&sort=${
         asc ? "asc" : "desc"
       }`
     )
